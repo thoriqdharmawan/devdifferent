@@ -19,3 +19,9 @@ export interface Character {
   // episode: CharacterEpisodes;
   // location: CharacterLocations;
 }
+
+export interface CharacterFilters {
+  name: string;
+  species: string;
+  status: string;
+}
