@@ -1,50 +1,77 @@
-# React + TypeScript + Vite
+# DevDifferent Project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to **DevDifferent**, a modern web application built with React, Vite, and TypeScript. This project incorporates a variety of cutting-edge technologies, including Tailwind CSS for styling and Apollo Client for GraphQL queries.
 
-Currently, two official plugins are available:
+## Table of Contents
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [Features](#features)
+- [Requirements](#requirements)
+- [Setup and Installation](#setup-and-installation)
+- [Usage](#usage)
+- [Environment Variables](#environment-variables)
+- [Available Scripts](#available-scripts)
+- [License](#license)
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **React** for a dynamic user interface.
+- **Vite** for lightning-fast development and builds.
+- **TypeScript** for type-safe development.
+- **Tailwind CSS** for utility-first styling.
+- **Apollo Client** for managing GraphQL queries and mutations.
+- **Radix UI** for accessible and composable UI primitives.
+- **ESLint** and **Prettier** for consistent and error-free code.
 
-- Configure the top-level `parserOptions` property like this:
+## Requirements
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+Make sure you have the following installed:
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+- **Node.js**: >= 16.x
+- **npm**: >= 8.x or **yarn**: >= 1.x
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## Setup and Installation
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/thoriqdharmawan/devdifferent
+   cd devdifferent
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   yarn install
+   ```
+
+3. Create a `.env` file in the root directory and add the following content:
+
+   ```env
+   VITE_API_URL=https://rickandmortyapi.com/graphql
+   ```
+
+4. Start the development server:
+
+   ```bash
+   yarn dev
+   ```
+
+5. Open your browser at `http://localhost:5173`.
+
+## Usage
+
+- Modify and extend components in the `src` folder.
+- Configure styling using Tailwind CSS in `tailwind.config.js`.
+
+## Environment Variables
+
+The project uses the following environment variable:
+
+- **`VITE_API_URL`**: Specifies the GraphQL endpoint used by Apollo Client.  
+  Example: `https://rickandmortyapi.com/graphql`
+
+Ensure this variable is set up correctly in your `.env` file.
+
+## Available Scripts
+
+- **`yarn dev`**: Starts the development server.
