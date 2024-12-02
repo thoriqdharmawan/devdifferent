@@ -73,12 +73,19 @@ export default function DetailCharacter() {
                 <div className="mt-3 flex flex-col gap-3">
                   <ItmSection
                     label="Last known location:"
-                    value={data?.data?.location.name}
+                    value={[
+                      data?.data?.location.name,
+                      data?.data?.location.dimension,
+                    ]
+                      .filter((a) => a)
+                      .join(" - ")}
                   />
 
                   <ItmSection
                     label="First seen in:"
-                    value={data?.data?.origin.name}
+                    value={[data?.data?.origin.name, data?.data?.origin.type]
+                      .filter((a) => a)
+                      .join(" - ")}
                   />
                 </div>
               </div>
@@ -88,6 +95,23 @@ export default function DetailCharacter() {
                 {isSelected ? "Remove from Selection" : "Add to Selection"}
               </Button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {!loading && data?.data && (
+        <div className="mt-6">
+          <h2 className="text-2xl font-bold">Episodes</h2>
+
+          <div className="mt-3">
+            {data?.data?.episode?.map((episode) => (
+              <div className="cursor-default rounded-md px-6 py-3 hover:bg-slate-100">
+                <p className="text-md font-bold">{episode.name}</p>
+                <p>
+                  {episode.episode} - {episode.air_date}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       )}
