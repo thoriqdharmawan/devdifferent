@@ -9,11 +9,13 @@ import { ResponseDataSingle } from "@/interfaces";
 import { Character, CharacterDetail } from "@/interfaces/characters";
 import { cn } from "@/lib/utils";
 import { useQuery } from "@apollo/client";
-import { Check, Plus } from "lucide-react";
+import { Check, ChevronLeft, Plus } from "lucide-react";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function DetailCharacter() {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const { storedValue, setValue } = useLocalStorage<Character[]>(
     "character",
@@ -43,7 +45,14 @@ export default function DetailCharacter() {
 
   return (
     <div>
-      <h1 className="text-3xl font-bold">Detail Characters</h1>
+      <div className="flex items-center gap-4">
+        <ChevronLeft
+          className="cursor-pointer"
+          onClick={() => navigate({ pathname: "/" })}
+        />
+
+        <h1 className="text-3xl font-bold">Detail Characters</h1>
+      </div>
 
       {loading && <LoadingSpinner />}
 
@@ -105,7 +114,7 @@ export default function DetailCharacter() {
 
           <div className="mt-3">
             {data?.data?.episode?.map((episode) => (
-              <div className="cursor-default rounded-md px-6 py-3 hover:bg-slate-100">
+              <div className="cursor-default rounded-md px-6 py-3 hover:bg-slate-100 hover:dark:text-black">
                 <p className="text-md font-bold">{episode.name}</p>
                 <p>
                   {episode.episode} - {episode.air_date}

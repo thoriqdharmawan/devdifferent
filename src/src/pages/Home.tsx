@@ -3,6 +3,7 @@ import CharacterChard from "@/components/custom/CharacterCard";
 import Dropdown from "@/components/custom/Dropdown";
 import EmptyState from "@/components/custom/EmptyState";
 import LoadingSpinner from "@/components/custom/LoadingSpinner";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { SPECIES_OPTIONS, STATUS_OPTIONS } from "@/constants";
 import { removeDuplicates } from "@/helpers";
@@ -58,7 +59,7 @@ export default function Home() {
       <h1 className="text-3xl font-bold">Characters</h1>
 
       <div className="mt-6 flex w-full flex-col items-end justify-between gap-4 md:flex-row">
-        <div className="flex w-full flex-col items-center gap-4 md:flex-row">
+        <div className="flex w-full flex-col items-end gap-4 align-bottom md:flex-row">
           <Dropdown
             label="Species"
             value={filter.species}
@@ -73,6 +74,10 @@ export default function Home() {
             options={STATUS_OPTIONS}
             placeholder="Choose Status"
           />
+
+          <Button onClick={() => setFilter(DEFAULT_FILTER)}>
+            Clear Filter
+          </Button>
         </div>
 
         <div className="flex w-full flex-col gap-2 md:max-w-64 lg:w-full">
@@ -90,7 +95,7 @@ export default function Home() {
 
       {!loading && data?.data.results.length === 0 && <EmptyState />}
 
-      <div className="mt-8 flex flex-row flex-wrap justify-between gap-x-3 gap-y-9">
+      <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {!loading &&
           data?.data.results?.map((character) => {
             const isSelected = storedValue.some((c) => c.id === character.id);
