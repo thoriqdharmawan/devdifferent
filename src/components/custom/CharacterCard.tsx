@@ -3,23 +3,24 @@ import { AspectRatio } from "../ui/aspect-ratio";
 import { Button } from "../ui/button";
 import { Check, Plus } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Link } from "react-router-dom";
 
 interface Props {
   character: Character;
-  isInLocalStorage?: boolean;
+  isSelected?: boolean;
   onToggleLocalStorage: () => void;
 }
 
 export default function CharacterChard(props: Props) {
-  const { onToggleLocalStorage, isInLocalStorage } = props;
-  const { name, gender, image, species, status } = props.character || {};
+  const { onToggleLocalStorage, isSelected } = props;
+  const { id, name, gender, image, species, status } = props.character || {};
 
   return (
     <div
       className={cn(
         "min-w-[280px] max-w-[400px] overflow-hidden rounded-md bg-white p-2",
         {
-          "outline outline-1": isInLocalStorage,
+          "outline outline-1": isSelected,
         },
       )}
     >
@@ -32,9 +33,11 @@ export default function CharacterChard(props: Props) {
       </AspectRatio>
 
       <div className="mt-3">
-        <h3 className="cursor-pointer truncate text-xl font-bold text-gray-900">
-          {name}
-        </h3>
+        <Link to={`/character/${id}`}>
+          <h3 className="cursor-pointer truncate text-xl font-bold text-gray-900 hover:underline">
+            {name}
+          </h3>
+        </Link>
         <div className="flex gap-2">
           <p className="mt-1 text-sm text-gray-600">{species}</p>
           <p className="mt-1 text-sm text-gray-600">{status}</p>
@@ -46,7 +49,7 @@ export default function CharacterChard(props: Props) {
         onClick={onToggleLocalStorage}
         className="ml-auto mt-1 block rounded-full"
       >
-        {isInLocalStorage ? <Check /> : <Plus />}
+        {isSelected ? <Check /> : <Plus />}
       </Button>
     </div>
   );

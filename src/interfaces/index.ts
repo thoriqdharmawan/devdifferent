@@ -3,3 +3,7 @@ export interface ReturnDataMany<T> {
     results: T[];
   };
 }
+
+export interface ResponseDataSingle<T> {
+  data: T;
+}

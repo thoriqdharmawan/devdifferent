@@ -6,7 +6,6 @@ import LoadingSpinner from "@/components/custom/LoadingSpinner";
 import { Input } from "@/components/ui/input";
 import { SPECIES_OPTIONS, STATUS_OPTIONS } from "@/constants";
 import { removeDuplicates } from "@/helpers";
-// import { getFromLocalStorage, setToLocalStorage } from "@/helpers";
 import useDebounce from "@/hooks/use-debounce";
 import { useLocalStorage } from "@/hooks/use-localstorage";
 import { ReturnDataMany } from "@/interfaces";
@@ -45,10 +44,8 @@ export default function Home() {
     setFilter((prev) => ({ ...prev, [field]: value }));
   };
 
-  const toggleCharacter = (character: Character) => {
-    const isRemove = storedValue.some((c) => c.id === character.id);
-
-    if (isRemove) {
+  const toggleCharacter = (isSelected: boolean, character: Character) => {
+    if (isSelected) {
       setValue(storedValue.filter((c) => c.id !== character.id));
       return;
     }
@@ -96,16 +93,16 @@ export default function Home() {
       <div className="mt-8 flex flex-row flex-wrap justify-between gap-x-3 gap-y-9">
         {!loading &&
           data?.data.results?.map((character) => {
-            const isInLocalStorage = storedValue.some(
-              (c) => c.id === character.id,
-            );
+            const isSelected = storedValue.some((c) => c.id === character.id);
 
             return (
               <CharacterChard
                 key={character.id}
                 character={character}
-                isInLocalStorage={isInLocalStorage}
-                onToggleLocalStorage={() => toggleCharacter(character)}
+                isSelected={isSelected}
+                onToggleLocalStorage={() =>
+                  toggleCharacter(isSelected, character)
+                }
               />
             );
           })}
