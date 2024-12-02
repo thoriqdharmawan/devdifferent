@@ -1,15 +1,11 @@
-import { Link, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
+import Layout from "./components/layout/base";
 
 function App() {
   return (
-    <div>
-      <nav>
-        <Link to="/">Home</Link>
-        {" | "}
-        <Link to="/about">About</Link>
-      </nav>
+    <Layout>
       <Outlet />
-    </div>
+    </Layout>
   );
 }
 
