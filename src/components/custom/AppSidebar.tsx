@@ -15,13 +15,13 @@ import { ModeToggle } from "./ModeToggle";
 
 const items = [
   {
-    title: "Home",
+    title: "Character",
     url: "/",
     icon: Home,
   },
   {
-    title: "About",
-    url: "/about",
+    title: "Episodes",
+    url: "/episodes",
     icon: Info,
   },
 ];
