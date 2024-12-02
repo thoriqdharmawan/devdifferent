@@ -11,6 +11,7 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { Link } from "react-router-dom";
+import { ModeToggle } from "./ModeToggle";
 
 const items = [
   {
@@ -28,9 +29,14 @@ const items = [
 export function AppSidebar() {
   return (
     <Sidebar>
-      <SidebarContent>
+      <SidebarContent className="px-2 py-1">
         <SidebarGroup>
-          <SidebarGroupLabel>Application</SidebarGroupLabel>
+          <div className="mb-2 flex items-center gap-1">
+            <ModeToggle />
+            <SidebarGroupLabel className="text-sm">
+              Dev Different Challenge
+            </SidebarGroupLabel>
+          </div>
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => (
