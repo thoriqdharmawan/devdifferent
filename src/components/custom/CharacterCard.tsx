@@ -16,9 +16,11 @@ export default function CharacterChard(props: Props) {
 
       <div className="mt-3">
         <h3 className="truncate text-xl font-bold text-gray-900">{name}</h3>
-        <p className="mt-1 text-sm text-gray-600">{species}</p>
-        <p className="mt-1 text-sm text-gray-600">{status}</p>
-        <p className="mt-1 text-sm text-gray-600">{gender}</p>
+        <div className="flex gap-2">
+          <p className="mt-1 text-sm text-gray-600">{species}</p>
+          <p className="mt-1 text-sm text-gray-600">{status}</p>
+          <p className="mt-1 text-sm text-gray-600">{gender}</p>
+        </div>
       </div>
     </div>
   );

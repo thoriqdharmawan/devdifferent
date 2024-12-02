@@ -74,7 +74,7 @@ export default function Home() {
 
       {!loading && data?.data.results.length === 0 && <EmptyState />}
 
-      <div className="mt-8 flex flex-row flex-wrap justify-between gap-x-3 gap-y-6">
+      <div className="mt-8 flex flex-row flex-wrap justify-between gap-x-3 gap-y-9">
         {!loading &&
           data?.data.results?.map((character) => (
             <CharacterChard key={character.id} character={character} />
