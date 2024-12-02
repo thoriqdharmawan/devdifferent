@@ -5,7 +5,10 @@ import EmptyState from "@/components/custom/EmptyState";
 import LoadingSpinner from "@/components/custom/LoadingSpinner";
 import { Input } from "@/components/ui/input";
 import { SPECIES_OPTIONS, STATUS_OPTIONS } from "@/constants";
+import { removeDuplicates } from "@/helpers";
+// import { getFromLocalStorage, setToLocalStorage } from "@/helpers";
 import useDebounce from "@/hooks/use-debounce";
+import { useLocalStorage } from "@/hooks/use-localstorage";
 import { ReturnDataMany } from "@/interfaces";
 import type { Character, CharacterFilters } from "@/interfaces/characters";
 import { useQuery } from "@apollo/client";
@@ -21,6 +24,11 @@ export default function Home() {
   const [filter, setFilter] = useState<CharacterFilters>(DEFAULT_FILTER);
   const debouncedName = useDebounce<string>(filter.name, 300);
 
+  const { setValue, storedValue } = useLocalStorage<Character[]>(
+    "character",
+    [],
+  );
+
   const { loading, data } = useQuery<ReturnDataMany<Character>>(
     GET_CHARACTERS,
     {
@@ -35,6 +43,17 @@ export default function Home() {
 
   const handleChangeFilter = (field: string, value: string) => {
     setFilter((prev) => ({ ...prev, [field]: value }));
+  };
+
+  const toggleCharacter = (character: Character) => {
+    const isRemove = storedValue.some((c) => c.id === character.id);
+
+    if (isRemove) {
+      setValue(storedValue.filter((c) => c.id !== character.id));
+      return;
+    }
+
+    setValue(removeDuplicates([...storedValue, character]));
   };
 
   return (
@@ -76,9 +95,20 @@ export default function Home() {
 
       <div className="mt-8 flex flex-row flex-wrap justify-between gap-x-3 gap-y-9">
         {!loading &&
-          data?.data.results?.map((character) => (
-            <CharacterChard key={character.id} character={character} />
-          ))}
+          data?.data.results?.map((character) => {
+            const isInLocalStorage = storedValue.some(
+              (c) => c.id === character.id,
+            );
+
+            return (
+              <CharacterChard
+                key={character.id}
+                character={character}
+                isInLocalStorage={isInLocalStorage}
+                onToggleLocalStorage={() => toggleCharacter(character)}
+              />
+            );
+          })}
       </div>
     </div>
   );
